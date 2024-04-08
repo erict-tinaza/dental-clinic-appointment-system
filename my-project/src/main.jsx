@@ -19,6 +19,7 @@ import "../public/css/tailwind.css";
 import 'primeicons/primeicons.css';
 import "primereact/resources/themes/lara-light-cyan/theme.css";
 import 'primeicons/primeicons.css';
+
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <BrowserRouter>
