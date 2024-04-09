@@ -16,10 +16,9 @@ function Home() {
       <Header />
 
       {/*  Page content */}
-      <main className="flex-grow">
-
+      <main className="flex-grow ">
         {/*  Page sections */}
-        <HeroHome />
+       <HeroHome/>
         {/* <ServicesOffered/>
         <Testimonials/> */}
       </main>

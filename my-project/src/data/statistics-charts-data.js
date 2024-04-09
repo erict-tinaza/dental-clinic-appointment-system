@@ -114,18 +114,18 @@ export const statisticsChartsData = [
   },
   {
     color: "white",
-    title: "Daily Sales",
-    description: "15% increase in today sales",
+    title: "Daily Appointments",
+    description: "15% increase in today appointments",
     footer: "updated 4 min ago",
     chart: dailySalesChart,
   },
-  {
-    color: "white",
-    title: "Completed Tasks",
-    description: "Last Campaign Performance",
-    footer: "just updated",
-    chart: completedTasksChart,
-  },
+  // {
+  //   color: "white",
+  //   title: "Completed Tasks",
+  //   description: "Last Campaign Performance",
+  //   footer: "just updated",
+  //   chart: completedTasksChart,
+  // },
 ];
 
 export default statisticsChartsData;

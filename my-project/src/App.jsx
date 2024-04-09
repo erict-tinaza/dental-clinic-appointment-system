@@ -1,10 +1,11 @@
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import { Dashboard, Auth } from "@/layouts";
 import { useState, useEffect } from "react";
 import Home from './pages/landing-page/Home';
 import SignIn from './pages/landing-page/SignIn';
 import SignUp from './pages/landing-page/SignUp';
 import 'aos/dist/aos.css';
+import AOS from 'aos';
 import './css/style.css';
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -16,6 +17,25 @@ function App() {
       setIsLoggedIn(false);
     }
   }, []);
+
+  const location = useLocation();
+
+  useEffect(() => {
+    AOS.init({
+      once: true,
+      disable: 'phone',
+      duration: 700,
+      easing: 'ease-out-cubic',
+    });
+  });
+
+  useEffect(() => {
+    document.querySelector('html').style.scrollBehavior = 'auto'
+    window.scroll({ top: 0 })
+    document.querySelector('html').style.scrollBehavior = ''
+  }, [location.pathname]); // triggered on route change
+
+
   return (
    <>
      <Routes>
