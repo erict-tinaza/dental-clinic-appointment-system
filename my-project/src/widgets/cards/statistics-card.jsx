@@ -6,8 +6,11 @@ import {
   Typography,
 } from "@material-tailwind/react";
 import PropTypes from "prop-types";
+import StatisticsCardsData from '../../data/StatisticsCardData.jsx';
 
 export function StatisticsCard({ color, icon, title, value, footer }) {
+  const statisticsCardsData = StatisticsCardsData();
+
   return (
     <Card className="border border-blue-gray-100 shadow-sm">
       <CardHeader

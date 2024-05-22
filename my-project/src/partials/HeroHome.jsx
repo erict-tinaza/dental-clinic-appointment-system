@@ -3,6 +3,7 @@ import Modal from '../utils/Modal';
 
 import HeroImage from '../images/hero-image.png';
 import HeroBg from '../images/hero-bg.jpg'
+import InfoCards from '../pages/InfoCards/InfoCards';
 
 function HeroHome() {
   // const [videoModalOpen, setVideoModalOpen] = useState(false);
@@ -13,7 +14,7 @@ function HeroHome() {
   // }, [videoModalOpen]);    
 
   return (
-    <section className="relative hero-bg h-screen">
+    <section className="relative hero-bg h-screen ">
       {/* Illustration behind hero content */}
       <div className="absolute left-1/2 transform -translate-x-1/2 bottom-0 pointer-events-none" aria-hidden="true">
         <svg width="1360" height="578" viewBox="0 0 1360 578" xmlns="http://www.w3.org/2000/svg">
@@ -37,7 +38,7 @@ function HeroHome() {
           {/* Section header */}
           <div className="text-center pb-12 md:pb-16">
             <h1 className="text-5xl md:text-6xl font-extrabold leading-tighter tracking-tighter mb-4" data-aos="zoom-y-out">
-              Gentle Dental <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-teal-400">Care</span>
+               <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-teal-400">Gentle Dental Care</span>
             </h1>
             <div className="max-w-3xl mx-auto">
               <p className="text-xl text-gray-700 mb-8" data-aos="zoom-y-out" data-aos-delay="150">
@@ -45,7 +46,7 @@ function HeroHome() {
               <div className="max-w-xs mx-auto sm:max-w-none sm:flex sm:justify-center" data-aos="zoom-y-out" data-aos-delay="300">
                 <div>
                   <a className="btn text-white bg-blue-600 hover:bg-blue-700 w-full mb-4 sm:w-auto sm:mb-0" href="#0">
-                    Get Appointment Now
+                    Get Started
                   </a>
                 </div>
                 <div>
@@ -55,6 +56,9 @@ function HeroHome() {
                 </div>
               </div>
             </div>
+          <div className='z-50 ' data-aos="zoom-y-out">
+          <InfoCards/>
+          </div>
           </div>
 
           {/* Hero image */}
@@ -88,14 +92,7 @@ function HeroHome() {
                     </radialGradient>
                     <circle id="hero-ill-d" cx="384" cy="216" r="64" />
                   </defs>
-                  <g fill="none" fillRule="evenodd">
-                    <circle fillOpacity=".04" fill="url(#hero-ill-a)" cx="384" cy="216" r="128" />
-                    <circle fillOpacity=".16" fill="url(#hero-ill-b)" cx="384" cy="216" r="96" />
-                    <g fillRule="nonzero">
-                      <use fill="#000" xlinkHref="#hero-ill-d" />
-                      <use fill="url(#hero-ill-e)" xlinkHref="#hero-ill-d" />
-                    </g>
-                  </g>
+                 
                 </svg>
               </div>
               {/* <button

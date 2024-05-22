@@ -7,10 +7,18 @@ import {
   RectangleStackIcon,
 } from "@heroicons/react/24/solid";
 import { Home, Profile, Tables, Notifications, Dentist, AppointmentSection, AppointmentHistory, Patient} from "@/pages/dashboard";
+import UsersTable from '../src/pages/dashboard/UserTable';
+import ManageDentists from "./pages/dashboard/ManageDentists";
+import ManagePatients from "./pages/dashboard/ManagePatients";
+import ManageAppointmentTypes from "./pages/dashboard/ManageAppointmentType";
+import ManageAppointments from "./pages/dashboard/ManageAppointments";
 import { SignIn, SignUp } from "@/pages/auth";
 import { FaUserDoctor } from "react-icons/fa6";
 import { FaNotesMedical } from "react-icons/fa";
 import { MdWorkHistory } from "react-icons/md";
+import { IoPersonSharp } from "react-icons/io5";
+import { MdMedicalServices } from "react-icons/md";
+
 
 
 const icon = {
@@ -27,37 +35,44 @@ export const routes = [
         path: "/home",
         element: <Home />,
       },
-      // {
-      //   icon: <UserCircleIcon {...icon} />,
-      //   name: "profile",
-      //   path: "/profile",
-      //   element: <Profile />,
-      // },
-      // {
-      //   icon: <TableCellsIcon {...icon} />,
-      //   name: "tables",
-      //   path: "/tables",
-      //   element: <Tables />,
-      // },
-      // {
-      //   icon: <InformationCircleIcon {...icon} />,
-      //   name: "notifications",
-      //   path: "/notifications",
-      //   element: <Notifications />,
-      // },<FaNotesMedical /><MdWorkHistory />
       {
-
         icon: <FaUserDoctor {...icon} />,
-        name: "dentist",
+        name: "dentist list",
         path: "/dentist",
         element: <Dentist />,
       },
+      {
+        icon: <FaUserDoctor {...icon} />,
+        name: "Manage Dentist",
+        path: "/manage-dentists",
+        element: <ManageDentists />,
+      },
+      {
+        icon: <IoPersonSharp {...icon} />,
+        name: "patient list",
+        path: "/patient",
+        element: <Patient />,
+      },
+      {
+        icon: <IoPersonSharp {...icon} />,
+        name: "Manage Patients",
+        path: "/manage-patients",
+        element: <ManagePatients />,
+      },
+      
+      {
+        icon: <MdMedicalServices {...icon} />,
+        name: "services",
+        path: "/services",
+        element: <ManageAppointmentTypes />,
+      },
+
      {
 
         icon: <FaNotesMedical {...icon} />,
         name: "appointment section",
         path: "/appointment-section",
-        element: <AppointmentSection />,
+        element: <ManageAppointments />,
       },
       {
 
@@ -69,22 +84,6 @@ export const routes = [
     ],
   },
   {
-    // title: "auth pages",
-    // layout: "auth",
-    // pages: [
-    //   {
-    //     icon: <ServerStackIcon {...icon} />,
-    //     name: "sign in",
-    //     path: "/sign-in",
-    //     element: <SignIn />,
-    //   },
-    //   {
-    //     icon: <RectangleStackIcon {...icon} />,
-    //     name: "sign up",
-    //     path: "/sign-up",
-    //     element: <SignUp />,
-    //   },
-    // ],
     title: "my account",
     layout: "dashboard",
     pages: [

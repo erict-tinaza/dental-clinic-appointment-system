@@ -1,32 +1,49 @@
-//Data for the card widgets on dashboard
+import { UsersIcon, UserPlusIcon, ChartBarIcon } from "@heroicons/react/24/solid";
+import DentistService from "@/service/DentistService";
+import PatientService from "@/service/PatientService";
+import AppointmentService from "@/service/AppointmentService";
 
-import {
-  BanknotesIcon,
-  UserPlusIcon,
-  UsersIcon,
-  ChartBarIcon,
-} from "@heroicons/react/24/solid";
+// Helper function to fetch the dentist count
+const fetchDentistCount = async () => {
+  try {
+    const response = await DentistService.getCount();
+    return response.data.data.count;
+  } catch (error) {
+    console.error("There was an error fetching the dentists count!", error);
+    return 0; // Return a default value in case of an error
+  }
+};
+
+// Helper function to fetch the patient count
+const fetchPatientCount = async () => {
+  try {
+    const response = await PatientService.getCount();
+    return response.data.data.count;
+  } catch (error) {
+    console.error("There was an error fetching the patients count!", error);
+    return 0; // Return a default value in case of an error
+  }
+};
+
+const fetchAppointmentCount = async () => {
+  try {
+    const response = await PatientService.getCount();
+    return response.data.data.count;
+  } catch (error) {
+    console.error("There was an error fetching the appointments count!", error);
+    return 0; // Return a default value in case of an error
+  }
+};
 
 export const statisticsCardsData = [
-  // {
-  //   color: "gray",
-  //   icon: BanknotesIcon,
-  //   title: "Today's Money",
-  //   value: "$53k",
-  //   footer: {
-  //     color: "text-green-500",
-  //     value: "+55%",
-  //     label: "than last week",
-  //   },
-  // },
   {
     color: "gray",
     icon: UsersIcon,
     title: "Today's Appointments",
-    value: "10",
+    value: "Loading...",
     footer: {
       color: "text-green-500",
-      value: "+3%",
+      value: "+3%+",
       label: "than last month",
     },
   },
@@ -34,24 +51,24 @@ export const statisticsCardsData = [
     color: "gray",
     icon: UserPlusIcon,
     title: "Total No. of Patients",
-    value: "1,000",
+    value: "Loading...", // Set a default value while fetching the count
     footer: {
       color: "text-red-500",
-      value: "-2%",
-      label: "than yesterday",
+      value: "",
+      label: "",
     },
   },
   {
     color: "gray",
     icon: ChartBarIcon,
     title: "Total No. of Dentist",
-    value: "$10",
+    value: "Loading...", // Set a default value while fetching the count
     footer: {
       color: "text-green-500",
-      value: "+0%",
-      label: "than yesterday",
+      value: "",
+      label: "",
     },
   },
 ];
 
-export default statisticsCardsData;
+export { fetchDentistCount, fetchPatientCount, fetchAppointmentCount };

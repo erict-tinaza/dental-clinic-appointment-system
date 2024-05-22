@@ -4,6 +4,9 @@ import { useState, useEffect } from "react";
 import Home from './pages/landing-page/Home';
 import SignIn from './pages/landing-page/SignIn';
 import SignUp from './pages/landing-page/SignUp';
+import PatientReg from './pages/landing-page/PatientRegForm';
+import Appointment from './pages/appointment/available-appointment/AvailableAppointment'
+
 import 'aos/dist/aos.css';
 import AOS from 'aos';
 import './css/style.css';
@@ -11,7 +14,7 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   useEffect(() => {
     const userToken = localStorage.getItem('token'); // Example: check for token in local storage
-    if (userToken) {
+    if (true) {
       setIsLoggedIn(true);
     } else {
       setIsLoggedIn(false);
@@ -52,6 +55,9 @@ function App() {
             <Route exact path="/" element={<Home />} />
             <Route path="/signin" element={<SignIn />} />
             <Route path="/signup" element={<SignUp />} />
+            <Route path="/appointment" element={<Appointment />} />
+            <Route path="patient-regform" element={<PatientReg />} />
+          
             {/* Redirect to sign-in page if user tries to access dashboard */}
             <Route path="/dashboard/*" element={<Navigate to="/signin" replace />} />
           </>
