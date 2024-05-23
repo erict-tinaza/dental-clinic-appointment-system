@@ -6,7 +6,6 @@ import SignIn from './pages/landing-page/SignIn';
 import SignUp from './pages/landing-page/SignUp';
 import PatientReg from './pages/landing-page/PatientRegForm';
 import Appointment from './pages/appointment/available-appointment/AvailableAppointment'
-
 import 'aos/dist/aos.css';
 import AOS from 'aos';
 import './css/style.css';

@@ -46,6 +46,28 @@ export function ManagePatients() {
             console.log(error);
           });
       };
+
+      const removePatient = (id) => {
+          PatientService.deletePatient(id)
+          .then((response) => {
+            retrievePatients();
+            console.log(response.data);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
+
+      const updatePatient = (updatedPatient) => {
+        PatientService.updatePatient(updatedPatient.id, updatedPatient)
+          .then((response) => {
+            console.log(response.data);
+            retrievePatients();
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      };
       useEffect(() => {
        retrievePatients();
       }, []);
@@ -71,15 +93,16 @@ export function ManagePatients() {
       //function for saving new patient
       const savePatient = () => {
         setSubmitted(true);
-    
-        if (patient.firstName.trim()) {
+        if (patient.first_name.trim()) {
           let _patients = [...patients];
           let _patient = { ...patient };
     
-          if (patient.id) {
-            const index = findIndexById(patient.id);
+          if (patient.patient_id) {
+            const index = findIndexById(patient.patient_id);
     
             _patients[index] = _patient;
+            console.log('update',_patient)
+             updatePatient(index,_patient);
             toast.current.show({
               severity: 'success',
               summary: 'Successful',
@@ -374,9 +397,9 @@ export function ManagePatients() {
               First Name
             </label>
             <InputText
-              id="firstName"
+              id="first_name"
               value={patient.first_name}
-              onChange={(e) => onInputChange(e, 'firstName')}
+              onChange={(e) => onInputChange(e, 'first_name')}
               required
               autoFocus
               className={classNames({
@@ -388,13 +411,13 @@ export function ManagePatients() {
             )}
           </div>
           <div className="field">
-            <label htmlFor="lastName" className="font-bold">
+            <label htmlFor="last_name" className="font-bold">
               Last Name
             </label>
             <InputText
-              id="lastName"
+              id="last_name"
               value={patient.last_name}
-              onChange={(e) => onInputChange(e, 'lastName')}
+              onChange={(e) => onInputChange(e, 'last_name')}
               required
               className={classNames({
                 'p-invalid': submitted && !patient.last_name,

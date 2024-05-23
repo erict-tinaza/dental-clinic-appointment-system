@@ -11,6 +11,7 @@ import { Dialog } from 'primereact/dialog';
 import { InputText } from 'primereact/inputtext';
 import { Toolbar } from 'primereact/toolbar';
 import DentistService from '../../service/DentistService';
+import { Dentist } from '.';
 
 const ManageDentists = () => {
     let emptyDentist = {
@@ -51,6 +52,37 @@ const ManageDentists = () => {
         retrieveDentists();
     }, []);
 
+    const createDentist = (user) =>{
+        DentistService.addDentist(user)
+        .then((response) =>{
+            console.log(response.data)
+            retrieveDentists();
+        }).catch((error) => {
+            console.log(error);
+          });
+    }
+
+    const updateDentist = (updatedDentist) => {
+        DentistService.updateDentist(updatedDentist.id, updatedDentist)
+        .then((response)=>{
+            retrieveDentists();
+        }).catch((error) => {
+            console.log(error);
+          });
+    }
+
+    const removeDentist = (id) => {
+        DentistService.deleteDentist(id)
+        .then((response)=>{
+            retrieveDentists();
+            console.log(response.data)
+        }).catch((error) => {
+            console.log(error);
+          });
+    }
+
+
+
     const openNew = () => {
         setDentist(emptyDentist);
         setSubmitted(false);
@@ -72,16 +104,15 @@ const ManageDentists = () => {
 
     const saveDentist = () => {
         setSubmitted(true);
-
         if (dentist.first_name.trim() && dentist.last_name.trim()) {
             let _dentists = [...dentists];
             let _dentist = { ...dentist };
 
             if (dentist.dentist_id) {
-                DentistService.updateDentist(dentist.dentist_id, _dentist)
-                    .then((response) => {
-                        const index = dentists.findIndex((d) => d.dentist_id === dentist.dentist_id);
-                        _dentists[index] = response.data;
+                        const index = dentists.findIndex(dentist.dentist_id);
+                        _dentists[index] = _user;
+                        console.log('dentistid', index)
+                        removeDentist(index)
                         setDentists(_dentists);
                         setDentistDialog(false);
                         setDentist(emptyDentist);
@@ -91,27 +122,20 @@ const ManageDentists = () => {
                             detail: 'Dentist Updated',
                             life: 3000,
                         });
-                    })
-                    .catch((error) => {
-                        console.log(error);
-                    });
             } else {
-                DentistService.createDentist(_dentist)
-                    .then((response) => {
+                        createDentist(_dentists);
                         _dentists.push(response.data);
                         setDentists(_dentists);
                         setDentistDialog(false);
                         setDentist(emptyDentist);
+                        createDentist(_dentist)
                         toast.current.show({
                             severity: 'success',
                             summary: 'Successful',
                             detail: 'Dentist Created',
                             life: 3000,
                         });
-                    })
-                    .catch((error) => {
-                        console.log(error);
-                    });
+        
             }
         }
     };
@@ -127,9 +151,10 @@ const ManageDentists = () => {
     };
 
     const deleteDentist = () => {
-        DentistService.deleteDentist(dentist.dentist_id)
-            .then(() => {
-                let _dentists = dentists.filter((val) => val.dentist_id !== dentist.dentist_id);
+    
+                let _dentists = dentists.filter((val) => val.dentist_id !== removeDentist(dentist.dentist_id));
+                console.log('id',_dentists)
+                // removeDentist(_dentists)
                 setDentists(_dentists);
                 setDeleteDentistDialog(false);
                 setDentist(emptyDentist);
@@ -139,10 +164,7 @@ const ManageDentists = () => {
                     detail: 'Dentist Deleted',
                     life: 3000,
                 });
-            })
-            .catch((error) => {
-                console.log(error);
-            });
+
     };
 
     const confirmDeleteSelectedDentists = () => {
@@ -250,7 +272,9 @@ const ManageDentists = () => {
                 label="Yes"
                 icon="pi pi-check"
                 severity="danger"
-                onClick={deleteDentist}
+                onClick={(id) => {
+                    deleteDentist(id)
+                }}
             />
         </React.Fragment>
     );
@@ -369,11 +393,11 @@ const ManageDentists = () => {
                     <label htmlFor="is_available">Availability</label>
                     <div className="formgroup-inline">
                         <div className="field-radiobutton">
-                            <RadioButton inputId="available" name="is_available" value="Available" onChange={onAvailabilityChange} checked={dentist.is_available === 'Available'} />
+                            <RadioButton inputId="available" name="is_available" value="1" onChange={onAvailabilityChange} checked={dentist.is_available === 'Available'} />
                             <label htmlFor="available">Available</label>
                         </div>
                         <div className="field-radiobutton">
-                            <RadioButton inputId="unavailable" name="is_available" value="Unavailable" onChange={onAvailabilityChange} checked={dentist.is_available === 'Unavailable'} />
+                            <RadioButton inputId="unavailable" name="is_available" value="0" onChange={onAvailabilityChange} checked={dentist.is_available === 'Unavailable'} />
                             <label htmlFor="unavailable">Unavailable</label>
                         </div>
                     </div>

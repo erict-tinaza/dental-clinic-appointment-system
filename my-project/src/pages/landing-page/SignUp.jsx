@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Header from '../../partials/Header';
-
 import Service from "../../service/Service";
 
 const SignUp = () => {
